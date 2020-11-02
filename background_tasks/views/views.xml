@@ -1,60 +1,54 @@
 <odoo>
   <data>
     <!-- explicit list view definition -->
-    <!--
-    <record model="ir.ui.view" id="background_tasks.list">
+    <record model="ir.ui.view" id="background_tasks.list_view">
       <field name="name">background_tasks list</field>
-      <field name="model">background_tasks.background_tasks</field>
+      <field name="model">background_tasks.task</field>
       <field name="arch" type="xml">
-        <tree>
+        <tree create="false" edit="false" delete="false"
+              default_order="create_date desc"
+              decoration-info="state=='created'"
+              decoration-success="state=='executed'"
+              decoration-warning="state=='execution'"
+              decoration-danger="state=='exception'">
           <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
+          <field name="create_date"/>
+          <field name="model_name"/>
+          <field name="state"/>
+          <field name="user_id"/>
         </tree>
       </field>
     </record>
-    -->
 
-    <!-- actions opening views on models -->
-    <!--
-    <record model="ir.actions.act_window" id="background_tasks.action_window">
-      <field name="name">background_tasks window</field>
-      <field name="res_model">background_tasks.background_tasks</field>
-      <field name="view_mode">tree,form</field>
-    </record>
-    -->
-
-    <!-- server action to the one above -->
-    <!--
-    <record model="ir.actions.server" id="background_tasks.action_server">
-      <field name="name">background_tasks server</field>
-      <field name="model_id" ref="model_background_tasks_background_tasks"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": self._name,
-        }
+    <record model="ir.ui.view" id="background_tasks.form">
+      <field name="name">background_tasks form</field>
+      <field name="model">background_tasks.task</field>
+      <field name="arch" type="xml">
+        <form create="false" edit="false" delete="false">
+          <group>
+            <field name="name"/>
+            <field name="create_date"/>
+            <field name="model_name"/>
+            <field name="state"/>
+            <field name="user_id"/>
+            <field name="result"/>
+            <field name="exception_message"/>
+          </group>
+        </form>
       </field>
     </record>
-    -->
 
-    <!-- Top menu item -->
-    <!--
-    <menuitem name="background_tasks" id="background_tasks.menu_root"/>
-    -->
-    <!-- menu categories -->
-    <!--
-    <menuitem name="Menu 1" id="background_tasks.menu_1" parent="background_tasks.menu_root"/>
-    <menuitem name="Menu 2" id="background_tasks.menu_2" parent="background_tasks.menu_root"/>
-    -->
-    <!-- actions -->
-    <!--
-    <menuitem name="List" id="background_tasks.menu_1_list" parent="background_tasks.menu_1"
-              action="background_tasks.action_window"/>
-    <menuitem name="Server to list" id="background_tasks" parent="background_tasks.menu_2"
-              action="background_tasks.action_server"/>
-    -->
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="background_tasks.action_window">
+      <field name="name">background tasks window</field>
+      <field name="res_model">background_tasks.task</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_type">form</field>
+      <field name="view_id" ref="background_tasks.list_view"/>
+    </record>
+
+    <menuitem name="Background tasks" id="background_tasks.list_menu" parent="base.menu_automation"
+              action="background_tasks.action_window" sequence="20"/>
+
   </data>
 </odoo>
