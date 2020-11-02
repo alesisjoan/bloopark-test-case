@@ -31,6 +31,7 @@
             <field name="model_name"/>
             <field name="state"/>
             <field name="user_id"/>
+            <field name="cron_id"/>
             <field name="result"/>
             <field name="exception_message"/>
           </group>

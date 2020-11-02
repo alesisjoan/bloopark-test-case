@@ -4,6 +4,8 @@ from odoo import api, models, fields
 
 _logger = logging.getLogger(__name__)
 
+cron_code_bgt = 'BGT '
+
 
 class BackgroundTasks(models.Model):
     _name = 'background_tasks.task'
@@ -38,17 +40,12 @@ class BackgroundTasks(models.Model):
 
     result = fields.Text()
 
-    """
-    if vals.get('name', "Nuevo") == "Nuevo":
-            vals['name'] = self.env['ir.sequence'].next_by_code('hr.haberesydesc') or "Nuevo"
-        return super(hr_haberesydesc, self).create(vals)
-    """
-
     @api.model
     def create(self, vals):
+        vals['name'] = vals['name'] + ' ' + self.env['ir.sequence'].next_by_code('background_tasks.task')
         task = super(BackgroundTasks, self).create(vals)
         cron = self.env['ir.cron'].sudo().create({
-            'name': vals.get('name'),
+            'name': cron_code_bgt + task.name,
             'model_id': self.env['ir.model'].search([('model', '=', self._name)], limit=1).id,
             'state': 'code',
             'code': "model.execute({})".format(str(task.id)),
