@@ -57,12 +57,17 @@ class BackgroundTasks(models.Model):
         })
         task.cron_id = cron.id
         task.user_id = self.env.user.id
+        task.systray(task.name)
         return task
 
-    @api.one
     def systray(self, message):
-        # to be implemented
-        pass
+        for task in self:
+            current = self.env['systray.user.message'].search([
+                ('user_id', '=', task.user_id.id)
+            ]) or self.env['systray.user.message'].create({
+                'user_id': task.user_id.id
+            })
+            current.message = message
 
     def notify(self, message):
         for task in self:

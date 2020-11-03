@@ -34,6 +34,6 @@ class SystrayBadge(models.TransientModel):
             ('user_id', '=', self.env.user.id)
         ], limit=1)
         try:
-            return message_user.message
+            return message_user.message or ''
         except Exception as e:
             return ''
