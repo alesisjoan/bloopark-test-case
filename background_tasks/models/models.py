@@ -67,7 +67,7 @@ class BackgroundTasks(models.Model):
     def notify(self, message):
         odoobot_id = self.env['ir.model.data'].xmlid_to_res_id("base.partner_root")
         odoobot = self.env['res.users'].browse(odoobot_id)
-        channel_odoo_bot_users = '%s, %s' % (odoobot.name, self.user_id.name)
+        channel_odoo_bot_users = 'Background Tasks: %s' % (self.user_id.name)
         channel_obj = self.env['mail.channel']
         channel_id = channel_obj.search([('name', 'like', channel_odoo_bot_users)]) or \
                      channel_obj.create(
@@ -92,16 +92,16 @@ class BackgroundTasks(models.Model):
         self._cr.commit()
         task.notify(task.message_chat_start)
         try:
-            _logger.debug("To start task {}".format(task.id))
+            _logger.debug("To start task {}".format(task.name))
             task.result = eval(task.code_execute) or ""
             task.notify(task.message_chat_finish)
             task.state = 'executed'
-            _logger.debug("Task finished {}".format(task.id))
+            _logger.debug("Task finished {}".format(task.name))
         except Exception as e:
             _logger.error("Exception for task {}: {}".format(task.name, str(e)))
             task.exception_message = str(e)
             task.state = 'exception'
-            task.notify('Exception has occurred {}'.format(str(e)))
+            task.notify('Task {} Exception has occurred {}'.format(task.name, str(e)))
 
 
 class Chat(models.TransientModel):
@@ -141,7 +141,8 @@ class Import(models.TransientModel):
 
     @api.multi
     def do(self, fields, columns, options, dryrun=False):
-        model_name = self.env[self.res_model]._name
+        model_obj = self.env[self.res_model]
+        model_name = model_obj._description or model_obj._name
         self.env['background_tasks.task'].create({
             'name': "Import task",
             'model': self._name,
@@ -154,7 +155,7 @@ class Import(models.TransientModel):
                                   " You will be notified by chat when its finished."
                 .format(model_name),
             'message_chat_finish': "Import task for model {} has been finished.".format(model_name),
-            'message_systray': "Import {}".format(model_name),
+            'message_systray': ""
         })
 
         return "Import task for model {} has been started." \
