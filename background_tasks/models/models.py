@@ -16,6 +16,7 @@ class BackgroundTasks(models.Model):
         ('execution', 'In execution'),
         ('executed', 'Executed'),
         ('exception', 'Exception'),
+        ('closed', 'Closed'),
     ], default='created', readonly=1)
 
     user_id = fields.Many2one('res.users')
@@ -102,6 +103,12 @@ class BackgroundTasks(models.Model):
             task.exception_message = str(e)
             task.state = 'exception'
             task.notify('Task {} Exception has occurred {}'.format(task.name, str(e)))
+
+    @api.multi
+    def mark_as_closed(self):
+        for s in self:
+            s.cron_id = False
+            s.state = 'closed'
 
 
 class Chat(models.TransientModel):

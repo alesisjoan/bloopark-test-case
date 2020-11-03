@@ -16,6 +16,10 @@
           <field name="model_name"/>
           <field name="state"/>
           <field name="user_id"/>
+          <button name="mark_as_closed"
+                  type="object"
+                  attrs="{'invisible': [('state', '=', 'closed')]}"
+                  string="Mark as close" class="oe_highlight"/>
         </tree>
       </field>
     </record>
