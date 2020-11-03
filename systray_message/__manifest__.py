@@ -4,7 +4,7 @@
 
 {
     'name': 'Systray message',
-    'version': '12.0',
+    'version': '13.0',
     'category': '',
     'sequence': 10,
     'author': 'Alesis Manzano',

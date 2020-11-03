@@ -64,27 +64,27 @@ class BackgroundTasks(models.Model):
         # to be implemented
         pass
 
-    @api.one
     def notify(self, message):
-        odoobot_id = self.env['ir.model.data'].xmlid_to_res_id("base.partner_root")
-        odoobot = self.env['res.users'].browse(odoobot_id)
-        channel_odoo_bot_users = 'Background Tasks: %s' % (self.user_id.name)
-        channel_obj = self.env['mail.channel']
-        channel_id = channel_obj.search([('name', 'like', channel_odoo_bot_users)]) or \
-                     channel_obj.create(
-                         {
-                             'name': channel_odoo_bot_users,
-                             'email_send': False,
-                             'channel_type': 'chat',
-                             'public': 'private',
-                             'channel_partner_ids': [(4, odoobot.partner_id.id),
-                                                     (4, self.user_id.partner_id.id)]
-                         }
-                     )
+        for task in self:
+            odoobot_id = self.env['ir.model.data'].xmlid_to_res_id("base.partner_root")
+            odoobot = self.env['res.users'].browse(odoobot_id)
+            channel_odoo_bot_users = 'Background Tasks: %s' % (task.user_id.name)
+            channel_obj = self.env['mail.channel']
+            channel_id = channel_obj.search([('name', 'like', channel_odoo_bot_users)]) or \
+                         channel_obj.create(
+                             {
+                                 'name': channel_odoo_bot_users,
+                                 'email_send': False,
+                                 'channel_type': 'chat',
+                                 'public': 'private',
+                                 'channel_partner_ids': [(4, odoobot.partner_id.id),
+                                                         (4, task.user_id.partner_id.id)]
+                             }
+                         )
 
-        channel_id.message_post(body=message, author_id=odoobot.id, message_type="comment",
-                                subtype="mail.mt_comment")
-        return True
+            channel_id.message_post(body=message, author_id=odoobot.id, message_type="comment",
+                                    subtype="mail.mt_comment")
+            return True
 
     @api.model
     def execute(self, id):
@@ -103,8 +103,9 @@ class BackgroundTasks(models.Model):
             task.exception_message = str(e)
             task.state = 'exception'
             task.notify('Task {} Exception has occurred {}'.format(task.name, str(e)))
+        finally:
+            task.systray('')
 
-    @api.multi
     def mark_as_closed(self):
         for s in self:
             s.cron_id = False
@@ -146,8 +147,8 @@ class Import(models.TransientModel):
         #                                                "Import task for model {} has been finished. Result: {}"
         #                                                .format(model_name, result))
 
-    @api.multi
     def do(self, fields, columns, options, dryrun=False):
+        self.ensure_one()
         model_obj = self.env[self.res_model]
         model_name = model_obj._description or model_obj._name
         self.env['background_tasks.task'].create({

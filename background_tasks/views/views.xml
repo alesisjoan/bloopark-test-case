@@ -48,7 +48,6 @@
       <field name="name">background tasks window</field>
       <field name="res_model">background_tasks.task</field>
       <field name="view_mode">tree,form</field>
-      <field name="view_type">form</field>
       <field name="view_id" ref="background_tasks.list_view"/>
     </record>
 
