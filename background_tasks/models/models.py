@@ -19,27 +19,36 @@ class BackgroundTasks(models.Model):
         ('closed', 'Closed'),
     ], default='created', readonly=1)
 
-    user_id = fields.Many2one('res.users')
+    user_id = fields.Many2one('res.users', readonly=1, string='User',
+                              help='The user that triggered the task.')
 
-    model = fields.Char()
+    model = fields.Char(readonly=1, string='Model Technical Name',
+                        help='The model technical name that the task is executed from.')
 
-    model_name = fields.Char()
+    model_name = fields.Char(readonly=1, string='Model Name',
+                             help='The model that the task is executed from.')
 
-    message_chat_start = fields.Text()
+    message_chat_start = fields.Text(readonly=1, string='Message Start',
+                                     help='The message that will notify the user when task starts')
 
-    message_chat_finish = fields.Text()
+    message_chat_finish = fields.Text(readonly=1, string='Message Finish',
+                                      help='The message that will notify the user when task finishs')
 
-    message_systray = fields.Char()
+    message_systray = fields.Char(readonly=1, string='Systray Message',
+                                  help='The message located in the systray')
 
-    name = fields.Char()
+    name = fields.Char(readonly=1)
 
-    code_execute = fields.Text()
+    code_execute = fields.Text(readonly=1, string='Code to execute',
+                               help='The code to be executed')
 
-    cron_id = fields.Many2one('ir.cron', ondelete='set null')
+    cron_id = fields.Many2one('ir.cron', ondelete='set null', string='Cron',
+                              help='The cron that will execute the task')
 
-    exception_message = fields.Text()
+    exception_message = fields.Text(readonly=1, string='Exception',
+                                    help='Result if the task could not be executed.')
 
-    result = fields.Text()
+    result = fields.Text(readonly=1, string='Result returned', help='The result if any, that the task returned.')
 
     @api.model
     def create(self, vals):
@@ -147,10 +156,6 @@ class Import(models.TransientModel):
     @api.model
     def do_legacy(self, id, fields, columns, options, dryrun):
         return super(Import, self.browse(id)).do(fields, columns, options, dryrun)
-        # model_name = self.env[self.browse(id).res_model]._name
-        # self.env['background_tasks.chat'].send_message([self.env.user.id],
-        #                                                "Import task for model {} has been finished. Result: {}"
-        #                                                .format(model_name, result))
 
     def do(self, fields, columns, options, dryrun=False):
         self.ensure_one()
@@ -160,13 +165,11 @@ class Import(models.TransientModel):
             'name': "Import task",
             'model': self._name,
             'model_name': self._description,
-            'code_execute': 'self.env["base_import.import"].do_legacy(' + str(self.id) + ',' + str(
-                fields) + ', ' + str(
-                columns) + ', ' + str(options) + ', '
+            'code_execute': 'self.env["base_import.import"].do_legacy(' + str(self.id) + ',' +
+                            str(fields) + ', ' + str(columns) + ', ' + str(options) + ', '
                             + str(dryrun) + ')',
             'message_chat_start': "Import task for model {} has been started."
-                                  " You will be notified by chat when its finished."
-                .format(model_name),
+                                  " You will be notified by chat when its finished.".format(model_name),
             'message_chat_finish': "Import task for model {} has been finished.".format(model_name),
             'message_systray': ""
         })
