@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_background_tasks_task,background_tasks.task,model_background_tasks_task,,1,1,1,0
+access_background_tasks_task,background_tasks.task,model_background_tasks_task,background_tasks.group_background_tasks_user,1,1,1,0
+access_background_tasks_cron,background_tasks.cron,base.model_ir_cron,background_tasks.group_background_tasks_user,1,1,1,0
