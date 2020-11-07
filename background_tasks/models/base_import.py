@@ -22,6 +22,7 @@ class Import(models.TransientModel):
             'name': "Import task",
             'model': self._name,
             'model_name': self._description,
+            'extra_info': 'Filename used: {}'.format(self.file_name),
             'code_execute': 'self.env["base_import.import"].do_legacy(' + str(self.id) + ',' +
                             str(fields) + ', ' + str(columns) + ', ' + str(options) + ', '
                             + str(dryrun) + ')',

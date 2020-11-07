@@ -42,6 +42,8 @@ class BackgroundTasks(models.Model):
     code_execute = fields.Text(readonly=1, string='Code to execute',
                                help='The code to be executed')
 
+    extra_info = fields.Text(readonly=1, string='Extra Info', help='Extra info for the task')
+
     cron_id = fields.Many2one('ir.cron', ondelete='set null', string='Cron',
                               help='The cron that will execute the task')
 

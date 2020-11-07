@@ -38,6 +38,7 @@
             <field name="cron_id"/>
             <field name="result"/>
             <field name="exception_message"/>
+            <field name="extra_info"/>
           </group>
         </form>
       </field>

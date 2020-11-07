@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "background_tasks",
+    'name': "Background Tasks",
 
     'summary': """
         Runs a (heavy) task in background and notify user when it's finished""",
