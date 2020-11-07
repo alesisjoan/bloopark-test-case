@@ -26,9 +26,11 @@
     'data': [
         'data/sequence.xml',
         'data/users.xml',
+        'data/products.xml',
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
+        'views/config.xml',
         'report/tasks.xml',
         'report/report_task_templates.xml',
 

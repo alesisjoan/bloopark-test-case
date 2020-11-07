@@ -70,13 +70,16 @@ class BackgroundTasks(models.Model):
         return task
 
     def systray(self, message):
-        for task in self:
-            current = self.env['systray.user.message'].search([
-                ('user_id', '=', task.user_id.id)
-            ]) or self.env['systray.user.message'].create({
-                'user_id': task.user_id.id
-            })
-            current.message = message
+        _logger.debug('module_message_systray {}'
+                      .format(self.env['ir.config_parameter'].sudo().get_param('background_tasks.module_message_systray')))
+        if self.env['ir.config_parameter'].sudo().get_param('background_tasks.module_message_systray'):
+            for task in self:
+                current = self.env['systray.user.message'].search([
+                    ('user_id', '=', task.user_id.id)
+                ]) or self.env['systray.user.message'].create({
+                    'user_id': task.user_id.id
+                })
+                current.message = message
 
     def notify(self, message):
         for task in self:
@@ -105,18 +108,21 @@ class BackgroundTasks(models.Model):
         task = self.browse(id)
         task.state = 'execution'
         self._cr.commit()
-        task.notify(task.message_chat_start)
+        if self.env['ir.config_parameter'].sudo().get_param('background_tasks.module_send_chat_start'):
+            task.notify(task.message_chat_start)
         try:
             _logger.debug("To start task {}".format(task.name))
             task.result = eval(task.code_execute) or ""
-            task.notify(task.message_chat_finish)
+            if self.env['ir.config_parameter'].sudo().get_param('background_tasks.module_send_chat_finish'):
+                task.notify(task.message_chat_finish)
             task.state = 'executed'
             _logger.debug("Task finished {}".format(task.name))
         except Exception as e:
             _logger.error("Exception for task {}: {}".format(task.name, str(e)))
             task.exception_message = str(e)
             task.state = 'exception'
-            task.notify('Task {} Exception has occurred {}'.format(task.name, str(e)))
+            if self.env['ir.config_parameter'].sudo().get_param('background_tasks.module_send_chat_finish'):
+                task.notify('Task {} Exception has occurred {}'.format(task.name, str(e)))
         finally:
             task.systray('')
 
