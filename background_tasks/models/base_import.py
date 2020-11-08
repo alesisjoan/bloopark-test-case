@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+"""
+DISCLAIMER: this is for demonstration purposes, take this code by your own responsabilities. This software is not meant
+to be updated or upgraded, or to solve issues.
+"""
 import logging
 from odoo import api, models, fields
 
@@ -12,12 +16,15 @@ class Import(models.TransientModel):
 
     @api.model
     def do_legacy(self, id, fields, columns, options, dryrun):
+        # this is the callback of the background task
         return super(Import, self.browse(id)).do(fields, columns, options, dryrun)
 
     def do(self, fields, columns, options, dryrun=False):
         self.ensure_one()
         model_obj = self.env[self.res_model]
         model_name = model_obj._description or model_obj._name
+        # note that we replaced the BaseImport#do statement by the this#do_legacy
+        # in code execute, we put python code
         task = self.env['background_tasks.task'].create({
             'name': "Import task",
             'model': self._name,

@@ -8,6 +8,8 @@
     'description': """
         The purpose is to run a heavy task, yielding a message to the user that the task has began so he can do other things while the task is being executed.
         Finally, it sends a message to the user that the task finished. This avoid the timeout for suchs task like a heavy picking (eg more than 500 elements).
+        DISCLAIMER: this is for demonstration purposes, take this code by your own responsabilities. This software is not meant to be updated or upgraded, or to 
+        solve issues.
     """,
 
     'author': "Alesis Manzano",

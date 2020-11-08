@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+"""
+DISCLAIMER: this is for demonstration purposes, take this code by your own responsabilities. This software is not meant
+to be updated or upgraded, or to solve issues.
+"""
 import logging
 from odoo import api, models, fields
 
@@ -56,6 +60,9 @@ class BackgroundTasks(models.Model):
     def create(self, vals):
         vals['name'] = vals['name'] + ' ' + self.env['ir.sequence'].next_by_code('background_tasks.task')
         task = super(BackgroundTasks, self).create(vals)
+        # we first create the task, we need the id
+        # as we ought to execute a api.model, we need to include id
+        # TODO we need to review values interval_number and interval_type, should be fixed in issue 11, 14
         cron = self.env['ir.cron'].sudo().create({
             'name': cron_code_bgt + task.name,
             'model_id': self.env['ir.model'].search([('model', '=', self._name)], limit=1).id,
@@ -82,6 +89,7 @@ class BackgroundTasks(models.Model):
                 })
                 current.message = message
 
+    # we notify a message to the user by the chat
     def notify(self, message):
         for task in self:
             odoobot_id = self.env['ir.model.data'].xmlid_to_res_id("base.partner_root")
@@ -108,12 +116,12 @@ class BackgroundTasks(models.Model):
     def execute(self, id):
         task = self.browse(id)
         task.state = 'execution'
-        self._cr.commit()
+        self._cr.commit()  # before entering the try block, we put state as execution
         if self.env['ir.config_parameter'].sudo().get_param('background_tasks.module_send_chat_start'):
             task.notify(task.message_chat_start)
         try:
             _logger.debug("To start task {}".format(task.name))
-            task.result = eval(task.code_execute) or ""
+            task.result = eval(task.code_execute) or ""  # if the code_execute is void, result is ""
             if self.env['ir.config_parameter'].sudo().get_param('background_tasks.module_send_chat_finish'):
                 task.notify(task.message_chat_finish)
             task.state = 'executed'
@@ -129,7 +137,7 @@ class BackgroundTasks(models.Model):
 
     def mark_as_closed(self):
         for s in self:
-            s.cron_id = False
+            s.cron_id = False  # TODO we need to review this for issue 11, 14
             s.state = 'closed'
 
 
