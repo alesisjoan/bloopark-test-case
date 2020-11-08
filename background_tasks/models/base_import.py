@@ -18,7 +18,7 @@ class Import(models.TransientModel):
         self.ensure_one()
         model_obj = self.env[self.res_model]
         model_name = model_obj._description or model_obj._name
-        self.env['background_tasks.task'].create({
+        task = self.env['background_tasks.task'].create({
             'name': "Import task",
             'model': self._name,
             'model_name': self._description,
@@ -31,6 +31,7 @@ class Import(models.TransientModel):
             'message_chat_finish': "Import task for model {} has been finished.".format(model_name),
             'message_systray': ""
         })
+        task.systray(task.name)
 
         return "Import task for model {} has been started." \
                " You will be notified by chat when its finished." \

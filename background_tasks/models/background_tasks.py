@@ -68,7 +68,6 @@ class BackgroundTasks(models.Model):
         })
         task.cron_id = cron.id
         task.user_id = self.env.user.id
-        task.systray(task.name)
         return task
 
     def systray(self, message):
