@@ -1,0 +1,299 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* background_tasks
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0-20201026\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-08 20:48+0000\n"
+"PO-Revision-Date: 2020-11-08 20:48+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_res_config_settings__module_message_systray
+msgid "Allow to display a systray message when the task is executed"
+msgstr "Permite mostrar un mensaje de bandeja del sistema cuando la tarea está siendo ejecutada"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_res_config_settings__module_send_chat_finish
+msgid "Allow to send chat when task finishes"
+msgstr "Permite enviar un chat cuando la tarea finaliza"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_res_config_settings__module_send_chat_start
+msgid "Allow to send chat when task starts"
+msgstr "Permite enviar un chat cuando la tarea comienza"
+
+#. module: background_tasks
+#: model:ir.module.category,name:background_tasks.module_category_background_tasks
+#: model:ir.ui.menu,name:background_tasks.list_menu
+#: model_terms:ir.ui.view,arch_db:background_tasks.res_config_settings_view_form
+msgid "Background tasks"
+msgstr "Tareas en segundo plano"
+
+#. module: background_tasks
+#: model:ir.model,name:background_tasks.model_base_import_import
+msgid "Base Import"
+msgstr ""
+
+#. module: background_tasks
+#: model:ir.model.fields.selection,name:background_tasks.selection__background_tasks_task__state__closed
+msgid "Closed"
+msgstr "Cerrado"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_background_tasks_task__code_execute
+msgid "Code to execute"
+msgstr "Código a ejecutar"
+
+#. module: background_tasks
+#: model:ir.model,name:background_tasks.model_res_config_settings
+msgid "Config Settings"
+msgstr "Opciones de Configuración"
+
+#. module: background_tasks
+#: model_terms:ir.ui.view,arch_db:background_tasks.report_task
+msgid "Create date"
+msgstr "Fecha de Creación"
+
+#. module: background_tasks
+#: model:ir.model.fields.selection,name:background_tasks.selection__background_tasks_task__state__created
+msgid "Created"
+msgstr "Creado"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_background_tasks_task__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_background_tasks_task__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_background_tasks_task__cron_id
+msgid "Cron"
+msgstr "Tarea programada"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_background_tasks_task__display_name
+msgid "Display Name"
+msgstr "Nombre a mostrar"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_background_tasks_task__exception_message
+#: model:ir.model.fields.selection,name:background_tasks.selection__background_tasks_task__state__exception
+msgid "Exception"
+msgstr "Excepción"
+
+#. module: background_tasks
+#: model:ir.model.fields.selection,name:background_tasks.selection__background_tasks_task__state__executed
+msgid "Executed"
+msgstr "Ejecutado"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_background_tasks_task__extra_info
+msgid "Extra Info"
+msgstr "Información extra"
+
+#. module: background_tasks
+#: model:ir.model.fields,help:background_tasks.field_background_tasks_task__extra_info
+msgid "Extra info for the task"
+msgstr "Información extra para la tarea"
+
+#. module: background_tasks
+#: model_terms:ir.ui.view,arch_db:background_tasks.report_task
+msgid "Has Exception"
+msgstr "Tiene excepción"
+
+#. module: background_tasks
+#: model_terms:ir.ui.view,arch_db:background_tasks.report_task
+msgid "Has Result"
+msgstr "Tiene resultado"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_background_tasks_task__id
+msgid "ID"
+msgstr "ID"
+
+#. module: background_tasks
+#: model:ir.model.fields.selection,name:background_tasks.selection__background_tasks_task__state__execution
+msgid "In execution"
+msgstr "En ejecución"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_background_tasks_task____last_update
+msgid "Last Modified on"
+msgstr "Última vez modificado por"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_background_tasks_task__write_uid
+msgid "Last Updated by"
+msgstr "Última vez actualizado por"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_background_tasks_task__write_date
+msgid "Last Updated on"
+msgstr "Última vez modificado el"
+
+#. module: background_tasks
+#: model_terms:ir.ui.view,arch_db:background_tasks.list_view
+msgid "Mark as close"
+msgstr "Marcar como cerrado"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_background_tasks_task__message_chat_finish
+msgid "Message Finish"
+msgstr "Mensaje de finalización"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_background_tasks_task__message_chat_start
+msgid "Message Start"
+msgstr "Mensaje de inicio"
+
+#. module: background_tasks
+#: model_terms:ir.ui.view,arch_db:background_tasks.report_task
+msgid "Model"
+msgstr "Modelo"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_background_tasks_task__model_name
+msgid "Model Name"
+msgstr "Nombre del Modelo"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_background_tasks_task__model
+msgid "Model Technical Name"
+msgstr "Nombre Técnico del Modelo"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_background_tasks_task__name
+#: model_terms:ir.ui.view,arch_db:background_tasks.report_task
+msgid "Name"
+msgstr "Nombre"
+
+#. module: background_tasks
+#: model_terms:ir.ui.view,arch_db:background_tasks.report_task
+msgid "OK"
+msgstr "OK"
+
+#. module: background_tasks
+#: model:product.product,name:background_tasks.product_product_lol
+#: model:product.template,name:background_tasks.product_product_lol_product_template
+msgid "Product with lot of lots lol"
+msgstr "Producto con muchos lotes LOL"
+
+#. module: background_tasks
+#: model:ir.model.fields,help:background_tasks.field_background_tasks_task__exception_message
+msgid "Result if the task could not be executed."
+msgstr "Resultado si la tarea no pudo ejecutarse"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_background_tasks_task__result
+msgid "Result returned"
+msgstr "Resultado devuelto"
+
+#. module: background_tasks
+#: model:ir.actions.act_window,name:background_tasks.action_backgroundtask_config_settings
+msgid "Settings"
+msgstr "Opciones"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_background_tasks_task__state
+#: model_terms:ir.ui.view,arch_db:background_tasks.report_task
+msgid "State"
+msgstr "Estado"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_background_tasks_task__message_systray
+msgid "Systray Message"
+msgstr "Mensaje de bandeja del sistema"
+
+#. module: background_tasks
+#: model:ir.model,name:background_tasks.model_background_tasks_task
+msgid "Task to be executed via a cron job"
+msgstr "Tarea a ejecutarse mediante una tarea programada"
+
+#. module: background_tasks
+#: model:ir.actions.report,name:background_tasks.task_report
+#: model_terms:ir.ui.view,arch_db:background_tasks.report_task
+msgid "Tasks"
+msgstr "Tareas"
+
+#. module: background_tasks
+#: model:res.groups,name:background_tasks.group_background_tasks_manager
+msgid "Tasks Administrator"
+msgstr "Administrador de Tareas"
+
+#. module: background_tasks
+#: model:res.groups,name:background_tasks.group_background_tasks_user
+msgid "Tasks User"
+msgstr "Usuario de Tareas"
+
+#. module: background_tasks
+#: model:ir.model.fields,help:background_tasks.field_background_tasks_task__code_execute
+msgid "The code to be executed"
+msgstr "Código a ejecutarse"
+
+#. module: background_tasks
+#: model:ir.model.fields,help:background_tasks.field_background_tasks_task__cron_id
+msgid "The cron that will execute the task"
+msgstr "Tarea programada que ejecutará la tarea"
+
+#. module: background_tasks
+#: model:ir.model.fields,help:background_tasks.field_background_tasks_task__message_systray
+msgid "The message located in the systray"
+msgstr "Mensaje localizado en la bandeja del sistema"
+
+#. module: background_tasks
+#: model:ir.model.fields,help:background_tasks.field_background_tasks_task__message_chat_finish
+msgid "The message that will notify the user when task finishs"
+msgstr "El mensaje que notificará al usuario cuando la tarea finalice"
+
+#. module: background_tasks
+#: model:ir.model.fields,help:background_tasks.field_background_tasks_task__message_chat_start
+msgid "The message that will notify the user when task starts"
+msgstr "El mensaje que notificará al usuario cuando la tarea comience"
+
+#. module: background_tasks
+#: model:ir.model.fields,help:background_tasks.field_background_tasks_task__model
+msgid "The model technical name that the task is executed from."
+msgstr "El nombre técnico del modelo desde el cual la tarea es ejecutada"
+
+#. module: background_tasks
+#: model:ir.model.fields,help:background_tasks.field_background_tasks_task__model_name
+msgid "The model that the task is executed from."
+msgstr "El modelo desde el cual la tarea es ejecutada"
+
+#. module: background_tasks
+#: model:ir.model.fields,help:background_tasks.field_background_tasks_task__result
+msgid "The result that the task returned."
+msgstr "El resultado que devolvió la tarea."
+
+#. module: background_tasks
+#: model:ir.model.fields,help:background_tasks.field_background_tasks_task__user_id
+msgid "The user that triggered the task."
+msgstr "El usuario que solicitó la tarea."
+
+#. module: background_tasks
+#: model:product.product,uom_name:background_tasks.product_product_lol
+#: model:product.template,uom_name:background_tasks.product_product_lol_product_template
+msgid "Units"
+msgstr "Unidades"
+
+#. module: background_tasks
+#: model:ir.model.fields,field_description:background_tasks.field_background_tasks_task__user_id
+msgid "User"
+msgstr "Usuario"
+
+#. module: background_tasks
+#: model:ir.actions.act_window,name:background_tasks.action_window
+msgid "Background Tasks"
+msgstr "Tareas en segundo plano"

@@ -46,7 +46,7 @@
 
     <!-- actions opening views on models -->
     <record model="ir.actions.act_window" id="background_tasks.action_window">
-      <field name="name">background tasks window</field>
+      <field name="name">Background Tasks</field>
       <field name="res_model">background_tasks.task</field>
       <field name="view_mode">tree,form</field>
       <field name="view_id" ref="background_tasks.list_view"/>

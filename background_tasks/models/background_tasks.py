@@ -50,7 +50,7 @@ class BackgroundTasks(models.Model):
     exception_message = fields.Text(readonly=1, string='Exception',
                                     help='Result if the task could not be executed.')
 
-    result = fields.Text(readonly=1, string='Result returned', help='The result if any, that the task returned.')
+    result = fields.Text(readonly=1, string='Result returned', help='The result that the task returned.')
 
     @api.model
     def create(self, vals):
