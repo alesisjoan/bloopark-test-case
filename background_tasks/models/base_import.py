@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-DISCLAIMER: this is for demonstration purposes, take this code by your own responsabilities. This software is not meant
-to be updated or upgraded, or to solve issues.
+DISCLAIMER: this is for demonstration purposes, take this code by your own responsabilities.
+This software is not meant to be updated or upgraded, or to solve issues.
 """
 import logging
-from odoo import api, models, fields
+from odoo import api, models
 
 _logger = logging.getLogger(__name__)
 

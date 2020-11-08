@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-DISCLAIMER: this is for demonstration purposes, take this code by your own responsabilities. This software is not meant
-to be updated or upgraded, or to solve issues.
+DISCLAIMER: this is for demonstration purposes, take this code by your own responsabilities.
+This software is not meant to be updated or upgraded, or to solve issues.
 """
 import logging
 from odoo import api, models, fields
@@ -36,7 +36,7 @@ class BackgroundTasks(models.Model):
                                      help='The message that will notify the user when task starts')
 
     message_chat_finish = fields.Text(readonly=1, string='Message Finish',
-                                      help='The message that will notify the user when task finishs')
+                                    help='The message that will notify the user when task finishs')
 
     message_systray = fields.Char(readonly=1, string='Systray Message',
                                   help='The message located in the systray')
@@ -54,7 +54,8 @@ class BackgroundTasks(models.Model):
     exception_message = fields.Text(readonly=1, string='Exception',
                                     help='Result if the task could not be executed.')
 
-    result = fields.Text(readonly=1, string='Result returned', help='The result that the task returned.')
+    result = fields.Text(readonly=1, string='Result returned',
+                         help='The result that the task returned.')
 
     @api.model
     def create(self, vals):
